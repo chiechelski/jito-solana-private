@@ -274,6 +274,7 @@ impl Tvu {
             accounts_background_request_sender,
             block_commitment_cache,
             transaction_status_sender,
+            latest_root_senders: vec![],
             rewards_recorder_sender,
             cache_block_meta_sender,
             entry_notification_sender,

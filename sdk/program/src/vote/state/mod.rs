@@ -599,6 +599,7 @@ impl VoteState {
         current_slot: Slot,
         timely_vote_credits: bool,
         deprecate_unused_legacy_vote_plumbing: bool,
+        pop_expired: bool,
     ) {
         // Ignore votes for slots earlier than we already have votes for
         if self
@@ -606,6 +607,10 @@ impl VoteState {
             .map_or(false, |last_voted_slot| next_vote_slot <= last_voted_slot)
         {
             return;
+        }
+
+        if pop_expired {
+            self.pop_expired_votes(next_vote_slot);
         }
 
         self.pop_expired_votes(next_vote_slot);
